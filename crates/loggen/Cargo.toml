@@ -1,0 +1,17 @@
+[package]
+name = "loggen"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Deterministic multi-gigabyte log generator for Dev Log Viewer benchmarking and testing"
+
+[dependencies]
+logcore = { path = "../logcore" }
+
+[dev-dependencies]
+serde_json.workspace = true
+
+[[bin]]
+name = "loggen"
+path = "src/main.rs"
