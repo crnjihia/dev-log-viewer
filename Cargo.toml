@@ -1,0 +1,28 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/logcore",
+    "crates/loggen",
+    "src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Chris Njihia <crnjihia@users.noreply.github.com>"]
+license = "MIT"
+repository = "https://github.com/crnjihia/dev-log-viewer"
+rust-version = "1.80"
+
+[workspace.dependencies]
+serde = "1.0.218"
+serde_json = "1.0.139"
+tracing = { version = "0.1.41", default-features = false, features = ["std"] }
+memmap2 = "0.9.5"
+memchr = "2.7.4"
+rayon = "1.10.0"
+regex = "1.11.1"
+notify = "8.0.0"
+crossbeam-channel = "0.5.14"
+encoding_rs = "0.8.35"
+
