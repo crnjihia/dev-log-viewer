@@ -1,0 +1,8 @@
+node_modules
+target
+dist
+dist-releases
+src-tauri/target
+.git
+.github
+*.log

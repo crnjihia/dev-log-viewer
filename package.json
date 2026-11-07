@@ -1,8 +1,27 @@
 {
-  "name": "dev-log-viewer",
-  "private": true,
+  "name": "@crnjihia/dev-log-viewer",
   "version": "0.1.0",
+  "description": "High-performance desktop and web log viewer for multi-gigabyte log streams",
   "type": "module",
+  "main": "./dist/index.html",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crnjihia/dev-log-viewer.git"
+  },
+  "homepage": "https://github.com/crnjihia/dev-log-viewer#readme",
+  "bugs": {
+    "url": "https://github.com/crnjihia/dev-log-viewer/issues"
+  },
+  "author": "Chris Njihia",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -43,4 +62,3 @@
     ]
   }
 }
-
