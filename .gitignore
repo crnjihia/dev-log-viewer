@@ -7,6 +7,7 @@ Cargo.lock
 node_modules/
 dist/
 dist-ssr/
+dist-releases/
 *.local
 
 # Tauri build artifacts
