@@ -85,10 +85,10 @@ jobs:
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         with:
-          tagName: ${{ github.ref_name || inputs.tag }}
-          releaseName: 'Dev Log Viewer ${{ github.ref_name || inputs.tag }}'
+          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}
+          releaseName: 'Dev Log Viewer ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}'
           releaseBody: |
-            ## Dev Log Viewer ${{ github.ref_name || inputs.tag }}
+            ## Dev Log Viewer ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}
             
             High-performance desktop log viewer for multi-gigabyte files.
             
@@ -99,7 +99,7 @@ jobs:
             
             ### Integrity & Verification:
             Verify SHA-256 checksums before installation. See `docs/code-signing.md` for certificate verification details.
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
 

@@ -11,13 +11,13 @@ name = "dev_log_viewer_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.2.0", features = [] }
+tauri-build = { version = "2.7", features = [] }
 
 [dependencies]
-tauri = { version = "2.2.0", features = [] }
-tauri-plugin-shell = "2.2.0"
-tauri-plugin-dialog = "2.2.0"
-tauri-plugin-fs = "2.2.0"
+tauri = { version = "2.12", features = [] }
+tauri-plugin-shell = "2.6"
+tauri-plugin-dialog = "2.8"
+tauri-plugin-fs = "2.7"
 serde = "1.0.218"
 serde_json = "1.0.139"
 tracing = { version = "0.1.41", default-features = false, features = ["std"] }
