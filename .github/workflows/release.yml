@@ -70,6 +70,16 @@ jobs:
       - name: Build Frontend Production Bundle
         run: pnpm run build
 
+      - name: Resolve Release Tag
+        id: tag
+        shell: bash
+        run: |
+          TAG="${{ inputs.tag }}"
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.ref_name }}"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
       - name: Build Tauri Desktop Package & Publish Release Assets
         uses: tauri-apps/tauri-action@v0
         env:
@@ -85,10 +95,10 @@ jobs:
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         with:
-          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}
-          releaseName: 'Dev Log Viewer ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}'
+          tagName: ${{ steps.tag.outputs.tag }}
+          releaseName: 'Dev Log Viewer ${{ steps.tag.outputs.tag }}'
           releaseBody: |
-            ## Dev Log Viewer ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag || 'v0.1.0' }}
+            ## Dev Log Viewer ${{ steps.tag.outputs.tag }}
             
             High-performance desktop log viewer for multi-gigabyte files.
             
