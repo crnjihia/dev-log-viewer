@@ -10,12 +10,13 @@
 ![React: 18.3](https://img.shields.io/badge/React-18.3-61dafb.svg)
 ![TypeScript: Strict](https://img.shields.io/badge/TypeScript-Strict-3178c6.svg)
 ![Platform: Windows | macOS | Linux](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)
+[![Release](https://img.shields.io/github/v/release/crnjihia/dev-log-viewer?color=brightgreen&label=Release%20v0.1.0)](https://github.com/crnjihia/dev-log-viewer/releases/latest)
 ![Tests: 62 Passing](https://img.shields.io/badge/Tests-62%20Passing-brightgreen.svg)
 
 **High-Performance Desktop Log Viewer for Multi-Gigabyte Files**  
 *Tazama magogo makubwa ya kompyuta kwa kasi ya umeme bila kufungika au kukwama.*
 
-[Features](#key-features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [JSON Query Syntax](#structured-json-query-language) • [Benchmarks](#performance-benchmarks--sla-verification) • [Documentation](#architecture-decision-records--guides)
+[Downloads](#downloads--installers) • [Features](#key-features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [JSON Query Syntax](#structured-json-query-language) • [Benchmarks](#performance-benchmarks--sla-verification) • [Documentation](#architecture-decision-records--guides)
 
 <br/>
 
@@ -182,6 +183,27 @@ Dev Log Viewer features full support for both **Standard** and **Vim** navigatio
 | `Ctrl+C` | `yy` | Copy selected line raw text to clipboard |
 | `Ctrl+W` | `:wrap` | Toggle soft word wrapping |
 | `Escape` | `Esc` | Close active modal or clear search filter |
+
+---
+
+## 📥 Downloads & Installers
+
+Pre-built binaries and installers for Windows, macOS, and Linux are hosted directly on the **[GitHub Releases v0.1.0](https://github.com/crnjihia/dev-log-viewer/releases/tag/v0.1.0)** page:
+
+| Platform | Format | Direct Download Link | Notes |
+| :--- | :--- | :--- | :--- |
+| **Windows** (x64) | **NSIS Setup (.exe)** | [Download `Dev.Log.Viewer_0.1.0_x64-setup.exe`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_0.1.0_x64-setup.exe) | Standard installer with file associations |
+| **Windows** (x64) | **WiX Installer (.msi)** | [Download `Dev.Log.Viewer_0.1.0_x64_en-US.msi`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_0.1.0_x64_en-US.msi) | Enterprise silent deployment support |
+| **Windows** (x64) | **Portable (.zip)** | [Download `dev-log-viewer-v0.1.0-windows-x64.zip`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/dev-log-viewer-v0.1.0-windows-x64.zip) | Standalone portable executable (no install) |
+| **macOS** (Apple Silicon) | **Disk Image (.dmg)** | [Download `Dev.Log.Viewer_0.1.0_aarch64.dmg`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_0.1.0_aarch64.dmg) | macOS 11+ (Apple M1/M2/M3/M4) |
+| **macOS** (Apple Silicon) | **App Archive (.tar.gz)** | [Download `Dev.Log.Viewer_aarch64.app.tar.gz`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_aarch64.app.tar.gz) | Compressed standalone `.app` bundle |
+| **Linux** (amd64) | **Debian Package (.deb)** | [Download `Dev.Log.Viewer_0.1.0_amd64.deb`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_0.1.0_amd64.deb) | Ubuntu 20.04+, Debian 11+ |
+| **Linux** (amd64) | **Universal AppImage** | [Download `Dev.Log.Viewer_0.1.0_amd64.AppImage`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer_0.1.0_amd64.AppImage) | Plug-and-play across modern Linux distros |
+| **Linux** (x86_64) | **RPM Package (.rpm)** | [Download `Dev.Log.Viewer-0.1.0-1.x86_64.rpm`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/Dev.Log.Viewer-0.1.0-1.x86_64.rpm) | Fedora, RHEL, CentOS, openSUSE |
+| **All Platforms** | **SHA-256 Checksums** | [Download `SHA256SUMS.txt`](https://github.com/crnjihia/dev-log-viewer/releases/download/v0.1.0/SHA256SUMS.txt) | Integrity verification digests |
+
+> [!NOTE]
+> On GitHub, downloadable desktop application binaries live under **[Releases](https://github.com/crnjihia/dev-log-viewer/releases)**, not under the GitHub "Packages" registry (which is reserved for Docker containers and package managers).
 
 ---
 
