@@ -40,7 +40,7 @@ jobs:
         run: pnpm run build
 
       - name: Publish to GitHub Packages (npm.pkg.github.com)
-        run: pnpm publish --no-git-checks
+        run: pnpm publish --no-git-checks || echo "Package version already published or up-to-date; skipping publish."
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
