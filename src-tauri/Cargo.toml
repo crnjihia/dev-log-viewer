@@ -1,0 +1,25 @@
+[package]
+name = "dev-log-viewer-app"
+version = "0.1.0"
+description = "Dev Log Viewer desktop application"
+edition = "2021"
+authors = ["Chris Njihia <crnjihia@users.noreply.github.com>"]
+license = "MIT"
+
+[lib]
+name = "dev_log_viewer_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.2.0", features = [] }
+tauri-plugin-shell = "2.2.0"
+tauri-plugin-dialog = "2.2.0"
+tauri-plugin-fs = "2.2.0"
+serde = "1.0.218"
+serde_json = "1.0.139"
+tracing = { version = "0.1.41", default-features = false, features = ["std"] }
+logcore = { path = "../crates/logcore" }
+

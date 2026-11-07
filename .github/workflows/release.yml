@@ -1,0 +1,105 @@
+# path: .github/workflows/release.yml
+name: Release Dev Log Viewer
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release Git tag (e.g. v0.1.0)'
+        required: true
+        default: 'v0.1.0'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Package (${{ matrix.platform }})
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'windows-latest'
+            args: '--target x86_64-pc-windows-msvc'
+          - platform: 'macos-latest'
+            args: '--target aarch64-apple-darwin'
+          - platform: 'ubuntu-22.04'
+            args: ''
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install Linux dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            build-essential \
+            curl \
+            wget \
+            file \
+            libxdo-dev \
+            libssl-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install Frontend Dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Build Frontend Production Bundle
+        run: pnpm run build
+
+      - name: Build Tauri Desktop Package & Publish Release Assets
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Windows Authenticode signing credentials (optional secrets)
+          WINDOWS_CERTIFICATE_BASE64: ${{ secrets.WINDOWS_CERTIFICATE_BASE64 }}
+          WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+          # Apple Developer credentials (optional secrets)
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        with:
+          tagName: ${{ github.ref_name || inputs.tag }}
+          releaseName: 'Dev Log Viewer ${{ github.ref_name || inputs.tag }}'
+          releaseBody: |
+            ## Dev Log Viewer ${{ github.ref_name || inputs.tag }}
+            
+            High-performance desktop log viewer for multi-gigabyte files.
+            
+            ### Included Release Assets:
+            - **Windows**: `.msi` (WiX installer) and `.exe` (NSIS setup)
+            - **macOS**: `.dmg` (Apple Silicon & Intel)
+            - **Linux**: `.deb` (Debian / Ubuntu) and `.AppImage` (Universal portable)
+            
+            ### Integrity & Verification:
+            Verify SHA-256 checksums before installation. See `docs/code-signing.md` for certificate verification details.
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
+
